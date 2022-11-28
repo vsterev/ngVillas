@@ -1,0 +1,19 @@
+<!-- To-Do ako nqma villa da izliza nadpis, che nqma -->
+<div *ngIf="userVillas.length === 0 || !userVillas">No one property is added to system</div>
+<div class="list-container">
+  <div class="list" *ngFor="let villa of userVillas">
+    <div class="name">{{ villa?.name }} - {{ villa?.region }}</div>
+    <div class="date">{{ villa?.date }}</div>
+    <div class="nights">{{ villa?.nights }}</div>
+    <div class="availability">
+      <mat-chip-list aria-label="villas info">
+        <ng-template #availible><mat-chip color="primary" selected>available</mat-chip></ng-template>
+        <ng-template #unavailible><mat-chip color="warn" selected>sold out</mat-chip></ng-template>
+        <ng-container *ngTemplateOutlet="!!villa?.reservationId ? unavailible : availible"></ng-container>
+      </mat-chip-list>
+    </div>
+    <div class="more">
+      <a mat-stroked-button routerLink="/villa/edit/{{ villa._id }}" [state]="{ goBack: true }">edit ...</a>
+    </div>
+  </div>
+</div>
